@@ -1,0 +1,23 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tsar-4600/Matrix.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tsar-4600/Matrix/issues"
+  },
+  "homepage": "https://github.com/Tsar-4600/Matrix#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
