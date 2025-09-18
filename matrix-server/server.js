@@ -4,7 +4,7 @@ const pages = [
     'error', 'faq', 'guaranteed-success', 'index-2', 'index-3', 'index',
     'keyword-research', 'price', 'product-cart', 'product-details', 'product',
     'seo-counsultancy', 'service-details', 'service', 'team-details', 'team',
-    'testimonial', 'branding', 'сorporate-websites', 'online-stores', 'landing-site', 'mobile-applications', 
+    'testimonial', 'branding', 'сorporate', 'online-stores', 'landing-site', 'mobile-applications', 
     'search-engine-promotion', 'contextual-advertising', 'media-advertising', 'advertising-on-social-networks', 
     'website-audit', 'development-strategies', 'increasing-conversion', 
     'reputation-management', 'ideas-and-concepts', 'animation-and-characters', 'web-design'
