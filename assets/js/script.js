@@ -80,11 +80,10 @@
     // dynamic current class        
     let mainNavUL = $('.main-menu').find('.navigation');
     dynamicCurrentMenuClass(mainNavUL);
-	//Submenu Dropdown Toggle
-	if($('.main-header li.dropdown ul').length){
-		$('.main-header .navigation li.dropdown').append('<div class="dropdown-btn"><span class="fas fa-angle-down"></span></div>');
-		
-	}
+if($('.main-header li.dropdown ul').length){
+    // Добавляем стрелочку ВСЕМ dropdown элементам, КРОМЕ тех, у кого есть класс 'no-dropdown'
+    $('.main-header .navigation li.dropdown:not(.no-dropdown)').append('<div class="dropdown-btn"><span class="fas fa-angle-down"></span></div>');
+}
 
 	//Mobile Nav Hide Show
 	if($('.mobile-menu').length){

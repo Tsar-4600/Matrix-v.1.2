@@ -1,3 +1,14 @@
+const pages = [
+    'about', 'blog-details', 'blog-grid', 'blog', 'cart', 'checkout',
+    'competitor-analysis', 'contact', 'content-marketing', 'creative-approach',
+    'error', 'faq', 'guaranteed-success', 'index-2', 'index-3', 'index',
+    'keyword-research', 'price', 'product-cart', 'product-details', 'product',
+    'seo-counsultancy', 'service-details', 'service', 'team-details', 'team',
+    'testimonial', 'branding', 'сorporate-websites', 'online-stores', 'landing-site', 'mobile-applications', 
+    'search-engine-promotion', 'contextual-advertising', 'media-advertising', 'advertising-on-social-networks', 
+    'website-audit', 'development-strategies', 'increasing-conversion', 
+    'reputation-management', 'ideas-and-concepts', 'animation-and-characters', 'web-design'
+];
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -20,23 +31,18 @@ const assetsPath = path.join(rootDir, 'assets');
 // Serve static files from assets folder
 app.use('/assets', express.static(assetsPath));
 
-// Serve HTML files with correct paths
-app.get('/', (req, res) => {
-    res.sendFile(path.join(rootDir, 'index-2.html'));
+pages.forEach(page => {
+    // Маршрут без .html
+    app.get(`/${page}`, (req, res) => {
+        res.sendFile(path.join(rootDir, `${page}.html`));
+    });
+    
+    // Маршрут с .html
+    app.get(`/${page}.html`, (req, res) => {
+        res.sendFile(path.join(rootDir, `${page}.html`));
+    });
 });
 
-app.get('/contact', (req, res) => {
-    res.sendFile(path.join(rootDir, 'contact.html'));
-});
-
-// Простые маршруты без параметров
-app.get('/index-2.html', (req, res) => {
-    res.sendFile(path.join(rootDir, 'index-2.html'));
-});
-
-app.get('/contact.html', (req, res) => {
-    res.sendFile(path.join(rootDir, 'contact.html'));
-});
 
 // Обработчик контактной формы
 app.post('/contact', (req, res) => {
