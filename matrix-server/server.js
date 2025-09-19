@@ -1,15 +1,14 @@
 const pages = [
-    'about', 'checkout',
+    'about', 'blog-details', 'blog-grid', 'blog', 'cart', 'checkout',
     'competitor-analysis', 'contact', 'content-marketing', 'creative-approach',
-    'error', 'faq', 'guaranteed-success',
+    'error', 'faq', 'guaranteed-success', 'index-2', 'index-3', 'index',
     'keyword-research', 'price', 'product-cart', 'product-details', 'product',
     'seo-counsultancy', 'service-details', 'service', 'team-details', 'team',
-    'testimonial', 'branding', 'сorporate', 'online-stores', 'landing-site', 'mobile-applications',
-    'search-engine-promotion', 'contextual-advertising', 'media-advertising', 'advertising-on-social-networks',
-    'website-audit', 'development-strategies', 'increasing-conversion',
+    'testimonial', 'branding', 'сorporate', 'online-stores', 'landing-site', 'mobile-applications', 
+    'search-engine-promotion', 'contextual-advertising', 'media-advertising', 'advertising-on-social-networks', 
+    'website-audit', 'development-strategies', 'increasing-conversion', 
     'reputation-management', 'ideas-and-concepts', 'animation-and-characters', 'web-design'
 ];
-
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -28,37 +27,34 @@ app.use(express.urlencoded({ extended: true }));
 // Правильно определяем пути
 const rootDir = path.dirname(__dirname); // Поднимаемся на уровень выше matrix-server
 const assetsPath = path.join(rootDir, 'assets');
-const pagesDir = path.join(rootDir, 'pages'); // Добавляем путь к папке pages
 
 // Serve static files from assets folder
 app.use('/assets', express.static(assetsPath));
 
-// Главная страница (index.html остается в корне)
-app.get('/', (req, res) => {
-    res.sendFile(path.join(rootDir, 'index.html'));
-});
-
 pages.forEach(page => {
-    // Исключаем index из обработки в папке pages (он уже обработан выше)
-
     // Маршрут без .html
     app.get(`/${page}`, (req, res) => {
-        res.sendFile(path.join(pagesDir, `${page}.html`));
+        res.sendFile(path.join(rootDir, `${page}.html`));
     });
-
+    
+    // Маршрут с .html
+    app.get(`/${page}.html`, (req, res) => {
+        res.sendFile(path.join(rootDir, `${page}.html`));
+    });
 });
+
 
 // Обработчик контактной формы
 app.post('/contact', (req, res) => {
-    const { username, email, subject, message, agree } = req.body;
-
+    const { name, email, subject, message, agree } = req.body;
+    
     console.log('📧 New contact form submission:');
-    console.log('Name:', username);
+    console.log('Name:', name);
     console.log('Email:', email);
     console.log('Subject:', subject);
     console.log('Message:', message);
     console.log('Agreed to terms:', agree);
-
+    
     res.json({
         success: true,
         message: 'Message received successfully!',
@@ -68,7 +64,7 @@ app.post('/contact', (req, res) => {
 
 // Простой fallback без параметров
 app.use((req, res) => {
-    res.sendFile(path.join(rootDir, 'error.html'));
+    res.sendFile(path.join(rootDir, 'index-2.html'));
 });
 
 // Запуск сервера
@@ -76,7 +72,6 @@ app.listen(PORT, () => {
     console.log(`🚀 Express server running on http://localhost:${PORT}`);
     console.log(`📁 Root directory: ${rootDir}`);
     console.log(`📁 Assets path: ${assetsPath}`);
-    console.log(`📁 Pages directory: ${pagesDir}`); // Добавляем в лог
     console.log(`🌐 Home page: http://localhost:${PORT}/`);
     console.log(`📞 Contact page: http://localhost:${PORT}/contact`);
 });
