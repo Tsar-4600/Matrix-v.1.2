@@ -1,16 +1,19 @@
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
-const app = express();
-const PORT = 3000;
 const pages = [
     'about', 'blog-details', 'blog-grid', 'blog', 'cart', 'checkout',
     'competitor-analysis', 'contact', 'content-marketing', 'creative-approach',
     'error', 'faq', 'guaranteed-success', 'index-2', 'index-3', 'index',
     'keyword-research', 'price', 'product-cart', 'product-details', 'product',
     'seo-counsultancy', 'service-details', 'service', 'team-details', 'team',
-    'testimonial'
+    'testimonial', 'branding', 'сorporate', 'online-stores', 'landing-site', 'mobile-applications', 
+    'search-engine-promotion', 'contextual-advertising', 'media-advertising', 'advertising-on-social-networks', 
+    'website-audit', 'development-strategies', 'increasing-conversion', 
+    'reputation-management', 'ideas-and-concepts', 'animation-and-characters', 'web-design'
 ];
+const express = require('express');
+const cors = require('cors');
+const path = require('path');
+const app = express();
+const PORT = 3000;
 
 // Middleware
 app.use(cors({
