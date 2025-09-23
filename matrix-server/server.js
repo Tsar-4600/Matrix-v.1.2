@@ -1,17 +1,7 @@
-const pages = [
-    'about', 'blog-details', 'blog-grid', 'blog', 'cart', 'checkout',
-    'competitor-analysis', 'contact', 'content-marketing', 'creative-approach',
-    'error', 'faq', 'guaranteed-success', 'index-2', 'index-3', 'index',
-    'keyword-research', 'price', 'product-cart', 'product-details', 'product',
-    'seo-counsultancy', 'service-details', 'service', 'team-details', 'team',
-    'testimonial', 'branding', 'сorporate', 'online-stores', 'landing-site', 'mobile-applications', 
-    'search-engine-promotion', 'contextual-advertising', 'media-advertising', 'advertising-on-social-networks', 
-    'website-audit', 'development-strategies', 'increasing-conversion', 
-    'reputation-management', 'ideas-and-concepts', 'animation-and-characters', 'web-design'
-];
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 const app = express();
 const PORT = 3000;
 
@@ -25,20 +15,33 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Правильно определяем пути
-const rootDir = path.dirname(__dirname); // Поднимаемся на уровень выше matrix-server
+const rootDir = path.dirname(__dirname);
 const assetsPath = path.join(rootDir, 'assets');
 
 // Serve static files from assets folder
 app.use('/assets', express.static(assetsPath));
 
+// Список всех страниц
+const pages = [
+    'about', 'blog-details', 'blog-grid', 'blog', 'cart', 'checkout',
+    'competitor-analysis', 'contact', 'content-marketing', 'creative-approach',
+    'error', 'faq', 'guaranteed-success', 'index-2', 'index-3', 'index',
+    'keyword-research', 'price', 'product-cart', 'product-details', 'product',
+    'seo-counsultancy', 'service-details', 'service', 'team-details', 'team',
+    'testimonial', 'branding', 'сorporate', 'online-stores', 'landing-site', 'mobile-applications', 
+    'search-engine-promotion', 'contextual-advertising', 'media-advertising', 'advertising-on-social-networks', 
+    'website-audit', 'development-strategies', 'increasing-conversion', 
+    'reputation-management', 'ideas-and-concepts', 'animation-and-characters', 'web-design'
+];
+
+// Главная страница
+app.get('/', (req, res) => {
+    res.sendFile(path.join(rootDir, 'index.html'));
+});
+
+// Динамические маршруты для всех страниц
 pages.forEach(page => {
-    // Маршрут без .html
     app.get(`/${page}`, (req, res) => {
-        res.sendFile(path.join(rootDir, `${page}.html`));
-    });
-    
-    // Маршрут с .html
-    app.get(`/${page}.html`, (req, res) => {
         res.sendFile(path.join(rootDir, `${page}.html`));
     });
 });
@@ -61,9 +64,9 @@ app.post('/contact', (req, res) => {
     });
 });
 
-// Простой fallback без параметров
+// Обработчик 404 ошибок - для всех остальных маршрутов
 app.use((req, res) => {
-    res.sendFile(path.join(rootDir, 'index-2.html'));
+    res.status(404).sendFile(path.join(rootDir, 'error.html'));
 });
 
 // Запуск сервера
@@ -73,4 +76,6 @@ app.listen(PORT, () => {
     console.log(`📁 Assets path: ${assetsPath}`);
     console.log(`🌐 Home page: http://localhost:${PORT}/`);
     console.log(`📞 Contact page: http://localhost:${PORT}/contact`);
+    console.log(`❌ 404 page: http://localhost:${PORT}/any-wrong-url`);
+    console.log(`📄 Total pages: ${pages.length + 1} (including home page)`);
 });
