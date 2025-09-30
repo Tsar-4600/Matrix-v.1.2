@@ -1,0 +1,19 @@
+<%
+let content = `
+    <section class="error-section centred p_relative">
+        <div class="auto-container">
+            <div class="inner-box">
+                <figure class="error-image"><img src="/assets/images/resource/error.png" alt=""></figure>
+                <h1>404</h1>
+                <h3>Sorry We Can't Find That Page!</h3>
+                <p>We're not being able to find the page you're looking for.</p>
+                <div class="more__buttons">
+                    <a class="btn-1" href="/"> Back to Home<span></span> </a>
+                </div>
+            </div>
+        </div>
+    </section>
+`;
+%>
+
+<%- include('../layouts/main', {content: content}) %>
