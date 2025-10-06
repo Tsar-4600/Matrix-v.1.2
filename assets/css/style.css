@@ -611,6 +611,7 @@ img {
 }
 .btn-1:after {
   position: absolute;
+  margin-left: 20px;
   color: #fff;
   font-size: 18px;
   top: 50%;
@@ -3403,7 +3404,7 @@ section.faq-section.service {
   justify-content: center;
 }
 .funfact-section {
-  padding: 90px 0px 80px 0px;
+  padding: 50px 0px 80px 0px;
 }
 .funfact-section .anim-icon-1 {
   width: 247px;
@@ -3416,11 +3417,12 @@ section.faq-section.service {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 90px;
   background: #FFFFFF;
   box-shadow: 0px 100px 80px rgb(139 139 139 / 7%), 0px 44.6784px 38.6372px rgb(139 139 139 / 2%), 0px 30.5066px 24.7715px rgb(139 139 139 / 0%);
   border-radius: 10px;
+  align-items: stretch;
 }
 
 .counter-block-one .inner-box{
@@ -4134,6 +4136,7 @@ span.tab___all img {
   position: relative;
   display: block;
   margin-bottom: 20px;
+  max-width: 65%;
 }
 .copyright p {
   font-weight: 600;
@@ -4296,7 +4299,6 @@ span.tab___all img {
 /* home-two-header-end */
 /* home-two-banner */
 .banner__two {
-  display: flex;
   justify-content: center;
   padding: 33px 0px 0px;
 }

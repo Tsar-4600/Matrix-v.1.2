@@ -225,15 +225,24 @@
             </div>
             <div class="sidebar-from">
                 <h4>Get a free quote</h4>
-                <form method="post" action="sendemail.php" id="contact-form"> 
+                <form method="POST" id="contact-form-sidebar">
                     <div class="col-lg-12 col-md-12 col-sm-12 form-group p-0">
-                        <input type="text" name="username" placeholder="Your Name" required="">
+                        <input type="text" name="username" placeholder="Your Name" required>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 form-group p-0">
-                        <input type="email" name="email" placeholder="Your email" required="">
+                        <input type="email" name="email" placeholder="Your email" required>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 form-group p-0">
-                        <textarea name="message" placeholder="Message"></textarea>
+                        <input type="text" name="subject" placeholder="Subject" required>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 form-group p-0">
+                        <textarea name="message" placeholder="Message" required></textarea>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 form-group p-0">
+                        <div class="check-box">
+                            <input class="check" type="checkbox" id="sidebar-checkbox" name="agree" required>
+                            <label for="sidebar-checkbox" style="color: white;">Save my name, email, and website in this browser for the next time I comment. *</label>
+                        </div>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 form-group message-btn p-0">
                         <div class="submit more__buttons button__two"> 
@@ -265,7 +274,7 @@
             </div>
             <div class="container">
                 <div class="content-box">
-                    <h2 class="title">Service Details</h2>
+                    <h2 class="title">Анимация и персонажи</h2>
                 </div>
             </div>
         </section>
@@ -279,12 +288,10 @@
                         <aside class="sidebar">
                             <div class="sidebar__widget">
                                 <ul class="service__details__1__cat">
-                                    <li><a class="theme-btn" href="/content-marketing">Content Marketing <span class="icon-right-arrow"></span></a></li>
-                                    <li><a class="theme-btn" href="/keyword-research">Keyword Research <span class="icon-right-arrow"></span></a></li>
-                                    <li class="active"><a class="theme-btn" href="/competitor-analysis">Competitor Analysis<span class="icon-right-arrow"></span></a></li>
-                                    <li><a class="theme-btn" href="/seo-counsultancy">SEO Counsultancy <span class="icon-right-arrow"></span></a></li>                                
-                                    <li><a class="theme-btn" href="/creative-approach">Creative Approach <span class="icon-right-arrow"></span></a></li>
-                                    <li><a class="theme-btn" href="/guaranteed-success">Guaranteed Success<span class="icon-right-arrow"></span></a></li>
+                                    <li><a class="theme-btn" href="/web-design">Веб-дизайн<span class="icon-right-arrow"></span></a></li>
+                                    <li><a class="theme-btn" href="/branding">Брединг<span class="icon-right-arrow"></span></a></li>
+                                    <li><a class="theme-btn" href="/ideas-and-concepts">Идеи и концепции<span class="icon-right-arrow"></span></a></li>
+                                    <li class="active"><a class="theme-btn" href="/animation-and-characters">Анимации и персонажи<span class="icon-right-arrow"></span></a></li>                                
                                 </ul>
                             </div>
                             <div class="service__news__letter p_relative mt_40">
