@@ -6,7 +6,7 @@ const app = express();
 const http = require('http');
 const https = require('https');
 const PORT = 3000;
-
+// const PORT = 443;
 
 // Middleware
 app.use(cors({
@@ -17,13 +17,18 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Правильно определяем пути
-const rootDir = path.dirname(__dirname);
-const pagesDir = path.join(rootDir, 'pages');
-const assetsPath = path.join(rootDir, 'assets');
+// Настройка EJS как шаблонизатора 
+app.set('view engine', 'ejs'); // Теперь Express будет рендерить .ejs файлы
+// Указываем папку, где хранятся шаблоны (теперь это 'views', а не 'pages')
+app.set('views', [
+    path.join(__dirname, '..'),           // корневая папка
+    path.join(__dirname, '..', 'views'),  // папка views
+    path.join(__dirname, '..', 'partials') // папка partials
+]);
+
 
 // Serve static files from assets folder
-app.use('/assets', express.static(assetsPath));
+app.use('/assets', express.static(path.join(__dirname, '..', 'assets')));
 
 // Список всех страниц
 const pages = [
@@ -38,24 +43,31 @@ const pages = [
     'reputation-management', 'ideas-and-concepts', 'animation-and-characters', 'web-design', 'corporate'
 ];
 
+
 // Главная страница
 app.get('/', (req, res) => {
-    res.sendFile(path.join(rootDir, 'index.html'));
+    res.render('index');
+});
+
+// Страница ошибки (error.ejs находится в корне)
+app.get('/error', (req, res) => {
+    res.render('error');
 });
 
 // Динамические маршруты для всех страниц
 pages.forEach(page => {
     app.get(`/${page}`, (req, res) => {
-        res.sendFile(path.join(pagesDir, `${page}.html`));
+        // Указываем путь относительно папки views
+        res.render(path.join('views', page));
     });
 });
 
 // Обработчик контактной формы
 app.post('/contact', (req, res) => {
-    const { name, email, subject, message, agree } = req.body;
+    const { username, email, subject, message, agree } = req.body;
     
     console.log('📧 New contact form submission:');
-    console.log('Name:', name);
+    console.log('Name:', username);
     console.log('Email:', email);
     console.log('Subject:', subject);
     console.log('Message:', message);
@@ -77,17 +89,19 @@ app.get('/health', (req, res) => {
     });
 });
 
-
-// Обработчик 404 ошибок - для всех остальных маршрутов
+// Улучшенный обработчик 404 ошибок
 app.use((req, res) => {
-    res.status(404).sendFile(path.join(rootDir, 'error.html'));
+    res.status(404).render('error', {
+        errorCode: 404,
+        errorMessage: 'Страница не найдена'
+    });
 });
 
 // Запуск сервера
 app.listen(PORT, () => {
     console.log(`🚀 Express server running on http://localhost:${PORT}`);
-    console.log(`📁 Root directory: ${rootDir}`);
-    console.log(`📁 Assets path: ${assetsPath}`);
+    console.log(`📁 Views directory: ${path.join(__dirname, 'views')}`);
+    console.log(`📁 Assets path: ${path.join(__dirname, '..', 'assets')}`);
     console.log(`🌐 Home page: http://localhost:${PORT}/`);
     console.log(`📞 Contact page: http://localhost:${PORT}/contact`);
     console.log(`❌ 404 page: http://localhost:${PORT}/any-wrong-url`);
@@ -112,6 +126,8 @@ app.listen(PORT, () => {
 //             console.log(`🌐 Secure URL: https://${DOMAIN}/`);
 //             console.log(`📞 Contact page: https://${DOMAIN}/contact`);
 //             console.log(`❤️ Health check: https://${DOMAIN}/health`);
+//             console.log(`📁 Views directory: ${path.join(__dirname, '..')}`);
+//             console.log(`📁 Assets path: ${path.join(__dirname, '..', 'assets')}`);
 //         });
 
 //     } catch (error) {
@@ -137,9 +153,5 @@ app.listen(PORT, () => {
 
 // // Запуск серверов
 // console.log(`🚀 Starting HTTPS Express Server...`);
-// console.log(`📁 Root directory: ${rootDir}`);
-// console.log(`📁 Assets path: ${assetsPath}`);
-// console.log(`📁 Pages directory: ${pagesDir}`);
-
 // startHttpRedirectServer();
 // startHttpsServer();
